@@ -7,7 +7,8 @@
 - Maven 项目及 Java 8 编译目标
 - MyBatis 3.5.13、MySQL Connector/J 8.0.33、JUnit 4.13.2、Log4j 1.2.17
 - 阿里云 Maven 镜像与工作区本地仓库配置
-- `ssm_emp` 数据库、`emp` 表及四条初始数据脚本
+- `ssm_emp` 数据库、自定义 `emp` 表及五条初始数据脚本
+- 自定义字段 `email`、`phone`、`created_at`，以及唯一约束、检查约束和查询索引
 - Git 忽略规则
 - 依赖环境冒烟测试
 
@@ -21,27 +22,34 @@
 ## 初始化数据库
 
 ```powershell
+Copy-Item .\sql\init.sql "$env:TEMP\mybatis-lab-init.sql" -Force
 & 'C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe' `
-  -u root -p --default-character-set=utf8mb4 `
-  --execute="source E:/实验报告/mybatis-lab/sql/init.sql"
+  -u root -p --default-character-set=utf8mb4
 ```
 
-密码只在 MySQL 提示符中输入，不要写入项目文件或提交到 Git。
+登录 MySQL 后执行：
+
+```sql
+source C:/Users/Lenovo/AppData/Local/Temp/mybatis-lab-init.sql;
+```
+
+密码只在 MySQL 提示符中输入，不要写入项目文件或提交到 Git。初始化脚本会重建实验用
+`emp` 表，请勿在其中存放需要保留的正式数据。
 
 ## IDEA 中需要手工完成
 
 1. 打开本目录，选择 `pom.xml` 作为 Maven 项目导入。
 2. 在 Maven 设置中选用 `maven-settings.xml`，或把其中配置合并到个人 `settings.xml`。
-3. 安装并登录通义灵码、GitHub Copilot 或 CodeGeeX 中至少一个插件。
-4. 开启代码补全与行内提示，禁止自动应用未经审查的生成代码。
+3. 当前电脑使用 JDK 21，并通过 Maven `release=8` 编译；如需严格匹配指导书，可在 IDEA
+   中另外配置 JDK 8 或 JDK 11。
+4. AI 插件步骤按本次实验安排跳过。
 
-## 首次 Git 提交
-
-首次提交前请使用自己的真实信息配置身份：
+## Git 仓库
 
 ```powershell
-git config --global user.name "你的姓名拼音"
-git config --global user.email "你的学号邮箱@school.edu.cn"
-git add .
-git commit -m "init: mybatis 环境搭建"
+git status
+git log --oneline
+git remote -v
 ```
+
+项目已经初始化 Git，并推送到 `https://github.com/xwxdh123-prog/mybatis-lab`。
