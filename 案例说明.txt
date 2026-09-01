@@ -3,7 +3,7 @@
 完成范围：
 1. 任务一：Maven、Git、MySQL 和 MyBatis 项目初始化。
 2. 任务二：MyBatis 全局配置、实体类、Mapper 接口与 XML、MyBatisUtil、
-   Log4j SQL 日志、查询及新增/修改/删除 JUnit 测试。
+   Log4j 2 SQL 日志、查询及新增/修改/删除 JUnit 测试。
 3. 任务三：动态条件查询、动态更新、批量新增、批量删除和 choose 优先级查询。
 4. 任务四：MyBatis-Plus BaseMapper、条件构造器和分页查询。
 5. 任务五：故障复现与修复、AI 应用记录、Apifox 公开 GET 请求调试。

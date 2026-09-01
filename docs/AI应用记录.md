@@ -24,6 +24,9 @@
 4. MyBatis-Plus 首次运行缺少 Spring Core。检查异常类名后补充 `spring-core 5.3.30`。
 5. 条件查询的预期数量先写成 3，真实种子数据只匹配 2 条。对照初始化脚本后把断言改为 2。
 6. 用户明确取消 AI 插件步骤，因此项目没有安装或配置该插件。
+7. IDEA 报告旧依赖漏洞后，将 MySQL Connector/J 升级到 9.3.0，并把 Log4j 1 迁移到
+   Log4j 2.26.1。Spring Core 保留 5.3.30，以维持 Java 8 编译目标；当前项目不使用该 CVE
+   涉及的 Spring Security 方法授权功能。
 
 ## 使用边界
 

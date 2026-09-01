@@ -6,8 +6,8 @@
 ## 已准备内容
 
 - Maven 项目及 Java 8 编译目标
-- MyBatis-Plus 3.5.3.1、Spring Core 5.3.30、MySQL Connector/J 8.0.33
-- JUnit 4.13.2、Log4j 1.2.17
+- MyBatis-Plus 3.5.3.1、Spring Core 5.3.30、MySQL Connector/J 9.3.0
+- JUnit 4.13.2、Log4j 2.26.1
 - 阿里云 Maven 镜像与工作区本地仓库配置
 - `ssm_emp` 数据库、自定义 `emp` 表及五条初始数据脚本
 - 自定义字段 `email`、`phone`、`created_at`，以及唯一约束、检查约束和查询索引
@@ -73,6 +73,14 @@ try {
 - [故障复现与排查](docs/task5-troubleshooting.md)
 - [AI 应用记录](docs/AI应用记录.md)
 - [Apifox 接口调试](docs/task5-apifox.md)
+
+## 依赖安全说明
+
+- MySQL Connector/J 已从 8.0.33 升级至 9.3.0。
+- Log4j 1.2.17 已迁移至 Log4j 2.26.1，MyBatis 使用 `LOG4J2` 输出 SQL 日志。
+- Spring Core 5.3.30 仅用于 MyBatis-Plus 的泛型解析。项目没有引入 Spring Security，
+  也没有使用 `@EnableMethodSecurity` 或方法授权注解，因此不具备 CVE-2025-41249 描述的
+  触发条件。项目保留该版本以维持 Java 8 编译目标；该判断只适用于当前实验代码。
 
 ## 运行演示程序
 
