@@ -1,6 +1,7 @@
 # mybatis-lab
 
-《JAVA框架技术（一）》实验一任务一：开发环境搭建与项目初始化。
+《JAVA框架技术（一）》实验一任务一、任务二代码。项目完成开发环境初始化、
+MyBatis 配置和员工表基础 CRUD。
 
 ## 已准备内容
 
@@ -12,7 +13,10 @@
 - Git 忽略规则
 - 依赖环境冒烟测试
 - MyBatis 全局配置、`Emp` 实体类、Mapper 接口及 XML 映射
-- 连接真实 `ssm_emp` 数据库的查询测试
+- `MyBatisUtil` 统一创建 `SqlSessionFactory` 和 `SqlSession`
+- 查询、新增、修改、删除及自增主键回填
+- 可直接运行的 `MyBatisDemo` 和真实数据库 JUnit 测试
+- CRUD 测试执行后回滚，不改变五条初始员工数据
 
 ## 构建命令
 
@@ -40,7 +44,7 @@ source C:/Users/Lenovo/AppData/Local/Temp/mybatis-lab-init.sql;
 密码只在 MySQL 提示符中输入，不要写入项目文件或提交到 Git。初始化脚本会重建实验用
 `emp` 表，请勿在其中存放需要保留的正式数据。
 
-## 运行 MyBatis 查询测试
+## 运行 MyBatis 查询和 CRUD 测试
 
 在 PowerShell 7 中执行以下命令。密码只保存在当前终端进程的内存中，测试结束后立即清除。
 
@@ -54,7 +58,14 @@ try {
 }
 ```
 
-`MyBatisIntegrationTest` 会执行两条查询：读取全部 5 名员工，以及按编号读取“顾雪”。
+`MyBatisIntegrationTest` 先读取五名员工，再新增“唐宁”、验证主键回填、修改岗位与薪资、
+删除该测试员工。测试使用事务回滚，数据库仍保留五条初始数据。
+
+## 运行演示程序
+
+在 IDEA 中打开 `src/main/java/com/lab/demo/MyBatisDemo.java`，设置
+`MYBATIS_DB_PASSWORD` 环境变量后运行 `main` 方法。控制台会输出员工总数、员工对象及
+MyBatis SQL 日志。
 
 ## IDEA 中需要手工完成
 

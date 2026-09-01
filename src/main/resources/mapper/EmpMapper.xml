@@ -22,15 +22,46 @@
         hire_date, status, email, phone, created_at
     </sql>
 
-    <select id="findAll" resultMap="empResultMap">
+    <select id="selectAll" resultMap="empResultMap">
         SELECT <include refid="empColumns"/>
         FROM emp
         ORDER BY emp_id
     </select>
 
-    <select id="findById" parameterType="int" resultMap="empResultMap">
+    <select id="selectById" parameterType="int" resultMap="empResultMap">
         SELECT <include refid="empColumns"/>
         FROM emp
         WHERE emp_id = #{empId}
     </select>
+
+    <insert id="insert" parameterType="Emp"
+            useGeneratedKeys="true" keyProperty="empId" keyColumn="emp_id">
+        INSERT INTO emp (
+            emp_name, gender, dept, post, salary,
+            hire_date, status, email, phone
+        )
+        VALUES (
+            #{empName}, #{gender}, #{dept}, #{post}, #{salary},
+            #{hireDate}, #{status}, #{email}, #{phone}
+        )
+    </insert>
+
+    <update id="update" parameterType="Emp">
+        UPDATE emp
+        SET emp_name = #{empName},
+            gender = #{gender},
+            dept = #{dept},
+            post = #{post},
+            salary = #{salary},
+            hire_date = #{hireDate},
+            status = #{status},
+            email = #{email},
+            phone = #{phone}
+        WHERE emp_id = #{empId}
+    </update>
+
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM emp
+        WHERE emp_id = #{empId}
+    </delete>
 </mapper>

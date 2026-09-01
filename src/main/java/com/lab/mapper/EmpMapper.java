@@ -5,7 +5,13 @@ import com.lab.entity.Emp;
 import java.util.List;
 
 public interface EmpMapper {
-    List<Emp> findAll();
+    List<Emp> selectAll();
 
-    Emp findById(Integer empId);
+    Emp selectById(Integer empId);
+
+    int insert(Emp emp);
+
+    int update(Emp emp);
+
+    int deleteById(Integer empId);
 }

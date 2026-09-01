@@ -1,0 +1,18 @@
+案例名称：MyBatis 员工信息基础 CRUD
+
+完成范围：
+1. 任务一：Maven、Git、MySQL 和 MyBatis 项目初始化。
+2. 任务二：MyBatis 全局配置、实体类、Mapper 接口与 XML、MyBatisUtil、
+   Log4j SQL 日志、查询及新增/修改/删除 JUnit 测试。
+
+自定义内容：
+emp 表在指导书字段基础上增加 email、phone、created_at，并加入唯一约束、
+检查约束和查询索引。初始员工姓名及部门也使用自定义数据。
+
+安全说明：
+项目不保存 MySQL 密码。运行演示程序或数据库测试前，请通过
+MYBATIS_DB_PASSWORD 环境变量传入密码。
+
+数据库脚本：sql/init.sql
+演示程序：src/main/java/com/lab/demo/MyBatisDemo.java
+测试程序：src/test/java/com/lab/MyBatisIntegrationTest.java
