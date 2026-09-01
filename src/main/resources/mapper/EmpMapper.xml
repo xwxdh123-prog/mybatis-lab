@@ -64,4 +64,82 @@
         DELETE FROM emp
         WHERE emp_id = #{empId}
     </delete>
+
+    <select id="selectByCondition" parameterType="Emp" resultMap="empResultMap">
+        SELECT <include refid="empColumns"/>
+        FROM emp
+        <where>
+            <if test="empName != null and empName != ''">
+                AND emp_name LIKE CONCAT('%', #{empName}, '%')
+            </if>
+            <if test="gender != null and gender != ''">
+                AND gender = #{gender}
+            </if>
+            <if test="dept != null and dept != ''">
+                AND dept = #{dept}
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+        </where>
+        ORDER BY emp_id
+    </select>
+
+    <update id="updateDynamic" parameterType="Emp">
+        UPDATE emp
+        <set>
+            <if test="empName != null">emp_name = #{empName},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="dept != null">dept = #{dept},</if>
+            <if test="post != null">post = #{post},</if>
+            <if test="salary != null">salary = #{salary},</if>
+            <if test="hireDate != null">hire_date = #{hireDate},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="phone != null">phone = #{phone},</if>
+        </set>
+        WHERE emp_id = #{empId}
+    </update>
+
+    <insert id="insertBatch">
+        INSERT INTO emp (
+            emp_name, gender, dept, post, salary,
+            hire_date, status, email, phone
+        )
+        VALUES
+        <foreach collection="list" item="employee" separator=",">
+            (
+                #{employee.empName}, #{employee.gender}, #{employee.dept},
+                #{employee.post}, #{employee.salary}, #{employee.hireDate},
+                #{employee.status}, #{employee.email}, #{employee.phone}
+            )
+        </foreach>
+    </insert>
+
+    <delete id="deleteBatch">
+        DELETE FROM emp
+        WHERE emp_id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectByPriority" resultMap="empResultMap">
+        SELECT <include refid="empColumns"/>
+        FROM emp
+        <where>
+            <choose>
+                <when test="empName != null and empName != ''">
+                    emp_name LIKE CONCAT('%', #{empName}, '%')
+                </when>
+                <when test="dept != null and dept != ''">
+                    dept = #{dept}
+                </when>
+                <otherwise>
+                    1 = 1
+                </otherwise>
+            </choose>
+        </where>
+        ORDER BY emp_id
+    </select>
 </mapper>
