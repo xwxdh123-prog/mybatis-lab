@@ -22,19 +22,19 @@
         hire_date, status, email, phone, created_at
     </sql>
 
-    <select id="selectAll" resultMap="empResultMap">
+    <select id="selectAllCustom" resultMap="empResultMap">
         SELECT <include refid="empColumns"/>
         FROM emp
         ORDER BY emp_id
     </select>
 
-    <select id="selectById" parameterType="int" resultMap="empResultMap">
+    <select id="selectByIdCustom" parameterType="int" resultMap="empResultMap">
         SELECT <include refid="empColumns"/>
         FROM emp
         WHERE emp_id = #{empId}
     </select>
 
-    <insert id="insert" parameterType="Emp"
+    <insert id="insertCustom" parameterType="Emp"
             useGeneratedKeys="true" keyProperty="empId" keyColumn="emp_id">
         INSERT INTO emp (
             emp_name, gender, dept, post, salary,
@@ -46,7 +46,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="Emp">
+    <update id="updateCustom" parameterType="Emp">
         UPDATE emp
         SET emp_name = #{empName},
             gender = #{gender},
@@ -60,7 +60,7 @@
         WHERE emp_id = #{empId}
     </update>
 
-    <delete id="deleteById" parameterType="int">
+    <delete id="deleteCustomById" parameterType="int">
         DELETE FROM emp
         WHERE emp_id = #{empId}
     </delete>

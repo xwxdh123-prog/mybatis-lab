@@ -23,13 +23,13 @@ public class MyBatisIntegrationTest {
 
         try (SqlSession session = MyBatisUtil.openSession()) {
             EmpMapper mapper = session.getMapper(EmpMapper.class);
-            List<Emp> employees = mapper.selectAll();
+            List<Emp> employees = mapper.selectAllCustom();
 
             assertEquals(5, employees.size());
             assertEquals("周晨", employees.get(0).getEmpName());
             assertEquals("技术部", employees.get(0).getDept());
 
-            Emp employee = mapper.selectById(5);
+            Emp employee = mapper.selectByIdCustom(5);
             assertNotNull(employee);
             assertEquals("顾雪", employee.getEmpName());
             assertEquals("guxue@lab.example", employee.getEmail());
@@ -47,11 +47,11 @@ public class MyBatisIntegrationTest {
                 EmpMapper mapper = session.getMapper(EmpMapper.class);
                 Emp employee = createTaskTwoEmployee();
 
-                assertEquals(1, mapper.insert(employee));
+                assertEquals(1, mapper.insertCustom(employee));
                 assertNotNull(employee.getEmpId());
                 assertTrue(employee.getEmpId() > 0);
 
-                Emp inserted = mapper.selectById(employee.getEmpId());
+                Emp inserted = mapper.selectByIdCustom(employee.getEmpId());
                 assertNotNull(inserted);
                 assertEquals("唐宁", inserted.getEmpName());
                 assertEquals("数据部", inserted.getDept());
@@ -60,15 +60,15 @@ public class MyBatisIntegrationTest {
                 inserted.setPost("数据开发工程师");
                 inserted.setSalary(new BigDecimal("15200.00"));
                 inserted.setPhone("13900002002");
-                assertEquals(1, mapper.update(inserted));
+                assertEquals(1, mapper.updateCustom(inserted));
 
-                Emp updated = mapper.selectById(employee.getEmpId());
+                Emp updated = mapper.selectByIdCustom(employee.getEmpId());
                 assertEquals("数据开发工程师", updated.getPost());
                 assertEquals(0, new BigDecimal("15200.00").compareTo(updated.getSalary()));
                 assertEquals("13900002002", updated.getPhone());
 
-                assertEquals(1, mapper.deleteById(employee.getEmpId()));
-                assertNull(mapper.selectById(employee.getEmpId()));
+                assertEquals(1, mapper.deleteCustomById(employee.getEmpId()));
+                assertNull(mapper.selectByIdCustom(employee.getEmpId()));
             } finally {
                 session.rollback();
             }

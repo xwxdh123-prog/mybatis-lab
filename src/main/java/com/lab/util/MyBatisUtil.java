@@ -1,9 +1,12 @@
 package com.lab.util;
 
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.core.MybatisSqlSessionFactoryBuilder;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,7 +36,12 @@ public final class MyBatisUtil {
         runtimeProperties.setProperty("jdbc.password", password);
 
         try (InputStream input = Resources.getResourceAsStream("mybatis-config.xml")) {
-            return new SqlSessionFactoryBuilder().build(input, null, runtimeProperties);
+            SqlSessionFactory factory = new MybatisSqlSessionFactoryBuilder()
+                    .build(input, null, runtimeProperties);
+            MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+            interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
+            factory.getConfiguration().addInterceptor(interceptor);
+            return factory;
         } catch (IOException exception) {
             throw new IllegalStateException("读取 mybatis-config.xml 失败", exception);
         }

@@ -14,7 +14,7 @@ public final class MyBatisDemo {
     public static void main(String[] args) {
         try (SqlSession session = MyBatisUtil.openSession()) {
             EmpMapper mapper = session.getMapper(EmpMapper.class);
-            List<Emp> employees = mapper.selectAll();
+            List<Emp> employees = mapper.selectAllCustom();
             System.out.println("员工总数：" + employees.size());
             employees.forEach(System.out::println);
         }

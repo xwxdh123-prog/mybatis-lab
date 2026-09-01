@@ -1,20 +1,21 @@
 package com.lab.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lab.entity.Emp;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface EmpMapper {
-    List<Emp> selectAll();
+public interface EmpMapper extends BaseMapper<Emp> {
+    List<Emp> selectAllCustom();
 
-    Emp selectById(Integer empId);
+    Emp selectByIdCustom(Integer empId);
 
-    int insert(Emp emp);
+    int insertCustom(Emp emp);
 
-    int update(Emp emp);
+    int updateCustom(Emp emp);
 
-    int deleteById(Integer empId);
+    int deleteCustomById(Integer empId);
 
     List<Emp> selectByCondition(Emp condition);
 

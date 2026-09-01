@@ -55,7 +55,7 @@ public class DynamicSqlIntegrationTest {
                 patch.setSalary(new BigDecimal("14800.00"));
 
                 assertEquals(1, mapper.updateDynamic(patch));
-                Emp updated = mapper.selectById(1);
+                Emp updated = mapper.selectByIdCustom(1);
                 assertEquals("高级Java开发工程师", updated.getPost());
                 assertEquals(0, new BigDecimal("14800.00").compareTo(updated.getSalary()));
                 assertEquals("周晨", updated.getEmpName());

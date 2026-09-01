@@ -1,20 +1,33 @@
 package com.lab.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@TableName("emp")
 public class Emp {
+    @TableId(value = "emp_id", type = IdType.AUTO)
     private Integer empId;
+
+    @TableField("emp_name")
     private String empName;
     private String gender;
     private String dept;
     private String post;
     private BigDecimal salary;
+
+    @TableField("hire_date")
     private LocalDate hireDate;
     private Integer status;
     private String email;
     private String phone;
+
+    @TableField("created_at")
     private LocalDateTime createdAt;
 
     public Integer getEmpId() {
